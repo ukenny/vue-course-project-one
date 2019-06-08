@@ -28,15 +28,25 @@
     </section>
     <section class="row controls" v-if="!gameIsRunning">
       <div class="small-12 columns">
-        <button id="start-game">START NEW GAME</button>
+        <button id="start-game" @click="startGame()">
+          START NEW GAME
+        </button>
       </div>
     </section>
     <section class="row controls">
       <div class="small-12 columns" v-if="gameIsRunning">
-        <button id="attack">ATTACK</button>
-        <button id="special-attack">SPECIAL ATTACK</button>
-        <button id="heal">HEAL</button>
-        <button id="give-up">GIVE UP</button>
+        <button id="attack" @click="attack()">
+          ATTACK
+        </button>
+        <button id="special-attack" @click="specialAttack()">
+          SPECIAL ATTACK
+        </button>
+        <button id="heal" @click="heal()">
+          HEAL
+        </button>
+        <button id="give-up" @click="giveUp()">
+          GIVE UP
+        </button>
       </div>
     </section>
     <section class="row log">
@@ -63,6 +73,47 @@ export default {
     this.playerHealth = 100;
     this.monsterHealth = 100;
     this.gameIsRunning = false;
+  },
+  methods: {
+    startGame: function() {
+      this.gameIsRunning = true;
+      this.playerHealth = 100;
+      this.monsterHealth = 100;
+    },
+    attack: function() {
+      var attackMax = 10;
+      var attackMin = 3;
+      var damage = Math.max(
+        Math.floor(Math.random() * attackMax + 1),
+        attackMin
+      );
+      this.monsterHealth -= damage;
+
+      if (this.monsterHealth <= 0) {
+        alert("You won!");
+        this.gameIsRunning = false;
+        return;
+      }
+
+      var monsterMax = 12;
+      var monsterMin = 5;
+      damage = Math.max(Math.floor(Math.random() * monsterMax + 1), monsterMin);
+      this.playerHealth -= damage;
+
+      if (this.playerHealth <= 0) {
+        alert("You lost!");
+        this.gameIsRunning = false;
+      }
+    },
+    specialAttack: function() {
+      return;
+    },
+    heal: function() {
+      return;
+    },
+    giveUp: function() {
+      return;
+    }
   }
 };
 </script>

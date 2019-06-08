@@ -26,13 +26,13 @@
         </div>
       </div>
     </section>
-    <section class="row controls">
+    <section class="row controls" v-if="!gameIsRunning">
       <div class="small-12 columns">
         <button id="start-game">START NEW GAME</button>
       </div>
     </section>
     <section class="row controls">
-      <div class="small-12 columns">
+      <div class="small-12 columns" v-if="gameIsRunning">
         <button id="attack">ATTACK</button>
         <button id="special-attack">SPECIAL ATTACK</button>
         <button id="heal">HEAL</button>
